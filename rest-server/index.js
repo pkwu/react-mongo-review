@@ -4,6 +4,7 @@ const app = express();
 const path = require('path');
 const router = require('./routes');
 const parser = require('body-parser');
+require('./DB/index');
 
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
