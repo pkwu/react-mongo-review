@@ -14,8 +14,8 @@ class Login extends Component {
     this.setState({[e.target.name]: e.target.value});
   }
 
-  onSubmitHandler() {
-    console.log('fired submit!');
+  onSignUpHandler() {
+    console.log('fired signup');
     const payload = {
       username: this.state.username,
       password: this.state.password
@@ -30,6 +30,18 @@ class Login extends Component {
       })
   }
 
+  onLoginHandler() {
+    console.log('fired login');
+    axios.get(`/api/user/login/${this.state.username}/${this.state.password}`)
+      .then( response => {
+        console.log('Server replied with... ', response);
+        response.status === 202 ? this.props.toggleLoggedIn() : console.log('Did not successfully log in!');
+      })
+      .catch( err => {
+        console.log('Server errored with... ', err);
+      })
+  }
+
   render() {
     return (
       <div>
@@ -38,7 +50,8 @@ class Login extends Component {
         <div>Password: </div>
         <input name='password' onChange={this.onChangeHandler.bind(this)}/>
         <br/><br/>
-        <button onClick={this.onSubmitHandler.bind(this)}>Sign Up</button>
+        <button onClick={this.onSignUpHandler.bind(this)}>Sign Up</button>
+        <button onClick={this.onLoginHandler.bind(this)}>Login</button>
       </div>
     )
   }

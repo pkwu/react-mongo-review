@@ -21,11 +21,5 @@ sampleModelInstance.save()
     console.log('error connecting mongo queries')
   );
 
-/* Users Table */
-const userSchema = new Schema({
-  username: String,
-  password: String
-});
 
-const Users = mongoose.model('Users', userSchema);
-module.exports = Users;
+module.exports = mongoose;
